@@ -1,8 +1,7 @@
-package generator.service;
+package com.stration.adminstration.generator.service;
 
-import generator.pojo.User;
+import com.stration.adminstration.generator.pojo.User;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.springframework.stereotype.Service;
 
 /**
 * @author HP

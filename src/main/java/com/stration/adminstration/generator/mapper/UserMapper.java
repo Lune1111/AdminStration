@@ -1,8 +1,7 @@
-package generator.mapper;
+package com.stration.adminstration.generator.mapper;
 
-import generator.pojo.User;
+import com.stration.adminstration.generator.pojo.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 /**

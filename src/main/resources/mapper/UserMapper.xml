@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="generator.mapper.UserMapper">
+<mapper namespace="com.stration.adminstration.generator.mapper.UserMapper">
 
-    <resultMap id="BaseResultMap" type="generator.pojo.User">
+    <resultMap id="BaseResultMap" type="com.stration.adminstration.generator.pojo.User">
             <result property="userId" column="user_id" jdbcType="BIGINT"/>
             <result property="deptId" column="dept_id" jdbcType="BIGINT"/>
             <result property="userName" column="user_name" jdbcType="VARCHAR"/>

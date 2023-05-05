@@ -1,9 +1,9 @@
-package generator.service.impl;
+package com.stration.adminstration.generator.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import generator.pojo.User;
-import generator.service.UserService;
-import generator.mapper.UserMapper;
+import com.stration.adminstration.generator.pojo.User;
+import com.stration.adminstration.generator.service.UserService;
+import com.stration.adminstration.generator.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
 /**
