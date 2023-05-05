@@ -2,15 +2,14 @@ package com.stration.adminstration.generator.controller;
 
 import com.stration.adminstration.generator.Result.Code;
 import com.stration.adminstration.generator.Result.Result;
+import com.stration.adminstration.generator.pojo.User;
 import com.stration.adminstration.generator.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
     @Autowired UserService userService;
 
@@ -20,6 +19,15 @@ public class UserController {
             return new Result(Code.GetSuccess,"查找成功",userService.list());
         }catch(Exception exception){
             return new Result(Code.GetEro,"查找失败");
+        }
+    }
+
+    @PostMapping
+    public Result InsertNewUser(@RequestBody User user){
+        try{
+            return new Result(Code.PostSuccess,"添加成功",userService.save(user));
+        }catch(Exception exception){
+            return new Result(Code.PostEro,"添加失败");
         }
     }
 }
