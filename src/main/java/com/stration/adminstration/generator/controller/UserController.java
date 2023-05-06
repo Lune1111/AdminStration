@@ -30,4 +30,14 @@ public class UserController {
             return new Result(Code.PostEro,"添加失败");
         }
     }
+
+    @PutMapping
+    public Result updateUser(@RequestBody User user){
+        try{
+            return new Result(Code.PutSuccess,"修改成功",userService.updateById(user));
+        }catch(Exception exception){
+            System.out.println(exception.getMessage());
+            return new Result(Code.PostEro,"修改失败");
+        }
+    }
 }
