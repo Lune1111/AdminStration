@@ -1,7 +1,10 @@
 package com.stration.adminstration.generator.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.stration.adminstration.generator.pojo.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
 * @author HP
@@ -10,5 +13,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 
 public interface UserService extends IService<User> {
+
+ List<User> selectPageVo(IPage<User> page, Integer state);
+
 
 }

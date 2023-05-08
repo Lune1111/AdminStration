@@ -1,5 +1,8 @@
 package com.stration.adminstration;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.stration.adminstration.generator.mapper.UserMapper;
+import com.stration.adminstration.generator.pojo.User;
 import com.stration.adminstration.generator.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +14,13 @@ class AdminStrationApplicationTests {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserMapper mapper;
+
     @Test
     void contextLoads() {
-        System.out.println(userService.list(null));
+        Page<User> page =new Page<>(1,2);
+        System.out.println(userService.selectPageVo(page,null));
     }
 
 }

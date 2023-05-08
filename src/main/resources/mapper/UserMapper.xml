@@ -35,4 +35,7 @@
         create_time,update_by,update_time,
         remark
     </sql>
+    <select id="selectPageVo" resultType="com.stration.adminstration.generator.pojo.User">
+          SELECT * FROM sys_user
+    </select>
 </mapper>
