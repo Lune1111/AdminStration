@@ -10,40 +10,52 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
-    @Autowired UserService userService;
+    @Autowired
+    UserService userService;
 
     @GetMapping
-    public Result getListUser(@RequestParam Integer pageNumber,@RequestParam Integer pageSize){
-        try{
-            Page<User> page =new Page<>(pageNumber,pageSize);
+    public Result getListUser(@RequestParam Integer pageNumber, @RequestParam Integer pageSize) {
+        try {
+            Page<User> page = new Page<>(pageNumber, pageSize);
             List<User> users = userService.selectPageVo(page, null);
-            return new Result(Code.GetSuccess,"查找成功",users,page.getTotal());
-        }catch(Exception exception){
-            return new Result(Code.GetEro,"查找失败");
+            return new Result(Code.GetSuccess, "查找成功", users, page.getTotal());
+        } catch (Exception exception) {
+            return new Result(Code.GetEro, "查找失败");
         }
     }
 
     @PostMapping
-    public Result InsertNewUser(@RequestBody User user){
-        try{
-            return new Result(Code.PostSuccess,"添加成功",userService.save(user));
-        }catch(Exception exception){
-            return new Result(Code.PostEro,"添加失败");
+    public Result InsertNewUser(@RequestBody User user) {
+        try {
+            return new Result(Code.PostSuccess, "添加成功", userService.save(user));
+        } catch (Exception exception) {
+            return new Result(Code.PostEro, "添加失败");
         }
     }
 
     @PutMapping
-    public Result updateUser(@RequestBody User user){
-        try{
-            return new Result(Code.PutSuccess,"修改成功",userService.updateById(user));
-        }catch(Exception exception){
+    public Result updateUser(@RequestBody User user) {
+        try {
+            return new Result(Code.PutSuccess, "修改成功", userService.updateById(user));
+        } catch (Exception exception) {
             System.out.println(exception.getMessage());
-            return new Result(Code.PostEro,"修改失败");
+            return new Result(Code.PostEro, "修改失败");
+        }
+    }
+
+    @PostMapping("/deleteIds")
+    public Result deleteUser(@RequestBody List<Integer> ids) {
+        try {
+            return new Result(Code.DeleteSuccess, "删除成功", userService.removeByIds(ids));
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            return new Result(Code.DeleteEro, "删除失败");
         }
     }
 }
