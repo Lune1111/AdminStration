@@ -3,13 +3,13 @@ package com.stration.adminstration.generator.Result;
 public class Result {
     private Integer code;
     private String message;
-    private Object data;
+    private Object rows;
     private Long total;
 
-    public Result(Integer code, String message, Object data, Long total) {
+    public Result(Integer code, String message, Object rows, Long total) {
         this.code = code;
         this.message = message;
-        this.data = data;
+        this.rows = rows;
         this.total = total;
     }
 
@@ -18,15 +18,15 @@ public class Result {
         this.message = message;
     }
 
-    public Result(Integer code, Object data) {
+    public Result(Integer code, Object rows) {
         this.code = code;
-        this.data = data;
+        this.rows = rows;
     }
 
-    public Result(Integer code, String message, Object data) {
+    public Result(Integer code, String message, Object rows) {
         this.code = code;
         this.message = message;
-        this.data = data;
+        this.rows = rows;
     }
 
     public Long getTotal() {
@@ -53,11 +53,11 @@ public class Result {
         this.message = message;
     }
 
-    public Object getData() {
-        return data;
+    public Object getrows() {
+        return rows;
     }
 
-    public void setData(Object data) {
-        this.data = data;
+    public void setrows(Object rows) {
+        this.rows = rows;
     }
 }

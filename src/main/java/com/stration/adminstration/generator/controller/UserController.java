@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -52,6 +53,7 @@ public class UserController {
     @PostMapping("/deleteIds")
     public Result deleteUser(@RequestBody List<Integer> ids) {
         try {
+            System.out.println(ids);
             return new Result(Code.DeleteSuccess, "删除成功", userService.removeByIds(ids));
         } catch (Exception exception) {
             System.out.println(exception.getMessage());

@@ -8,6 +8,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+
 @SpringBootTest
 class AdminStrationApplicationTests {
 
@@ -19,8 +23,11 @@ class AdminStrationApplicationTests {
 
     @Test
     void contextLoads() {
-        Page<User> page =new Page<>(1,2);
-        System.out.println(userService.selectPageVo(page,null));
+
+        ArrayList Ids =new ArrayList<Integer>();
+        Ids.add(6);
+        Ids.add(7);
+        userService.removeByIds(Ids);
     }
 
 }
