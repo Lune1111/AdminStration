@@ -78,10 +78,10 @@ public class UserController {
             List<User> users = userService.list();
             ExcelWriter writer = ExcelUtil.getWriter(true);
             //自定义标题别名
-            writer.addHeaderAlias("userName", "账户名");
-            writer.addHeaderAlias("nickName", "昵称");
-            writer.addHeaderAlias("phonenumber", "手机号");
-            writer.addHeaderAlias("email", "邮箱");
+//            writer.addHeaderAlias("userName", "账户名");
+//            writer.addHeaderAlias("nickName", "昵称");
+//            writer.addHeaderAlias("phonenumber", "手机号");
+//            writer.addHeaderAlias("email", "邮箱");
 
             response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8");
             String fileName = URLEncoder.encode("用户信息", "UTF-8");
@@ -93,9 +93,9 @@ public class UserController {
             out.close();
 //            关闭writer
             writer.close();
-            return new Result(Code.GetSuccess, "导入成功");
+            return new Result(Code.GetSuccess, "导出成功");
         } catch (Exception exception) {
-            return new Result(Code.GetEro, "导入失败");
+            return new Result(Code.GetEro, "导出失败");
         }
     }
 
@@ -105,10 +105,9 @@ public class UserController {
             InputStream inputStream =file.getInputStream();
             ExcelReader reader =ExcelUtil.getReader(inputStream);
             List<User> users =reader.readAll(User.class);
-            System.out.println(users);
+            return new Result(Code.PostSuccess, "文件导入成功",userService.saveBatch(users));
         } catch (Exception exception) {
-
+            return new Result(Code.PostEro, "文件导入失败");
         }
-        return null;
     }
 }
