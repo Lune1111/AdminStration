@@ -1,5 +1,7 @@
 package com.stration.adminstration.generator.service.impl;
 
+import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -21,6 +23,26 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public List<User> selectPageVo(IPage<User> page, Integer state) {
         return baseMapper.selectPageVo(page,state);
+    }
+
+    @Override
+    public boolean login(User user) {
+        QueryWrapper queryWrapper =new QueryWrapper();
+        String Name=user.getUserName();
+        String Password=user.getPassword();
+        if(StrUtil.isBlank(Name)  || StrUtil.isBlank(Password)){
+            queryWrapper.eq("user_name",Name);
+            queryWrapper.eq("password",Password);
+            try{
+                baseMapper.selectOne(queryWrapper);
+                return true;
+            }catch (Exception exception){
+                exception.getMessage();
+                return false;
+            }
+        }else {
+            return false;
+        }
     }
 }
 

@@ -15,6 +15,6 @@ import java.util.List;
 public interface UserService extends IService<User> {
 
  List<User> selectPageVo(IPage<User> page, Integer state);
-
+boolean login(User user);
 
 }
