@@ -31,17 +31,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         String Name=user.getUserName();
         String Password=user.getPassword();
         if(StrUtil.isBlank(Name)  || StrUtil.isBlank(Password)){
+            return false;
+        }else {
             queryWrapper.eq("user_name",Name);
             queryWrapper.eq("password",Password);
             try{
-                baseMapper.selectOne(queryWrapper);
-                return true;
+                if(baseMapper.selectOne(queryWrapper)!=null){
+                    return true;
+                }
+                return false;
             }catch (Exception exception){
                 exception.getMessage();
                 return false;
             }
-        }else {
-            return false;
         }
     }
 }

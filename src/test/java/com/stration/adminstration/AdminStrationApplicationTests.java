@@ -23,11 +23,25 @@ class AdminStrationApplicationTests {
 
     @Test
     void contextLoads() {
-
-        ArrayList Ids =new ArrayList<Integer>();
-        Ids.add(6);
-        Ids.add(7);
-        userService.removeByIds(Ids);
+        int x = 123;
+        int z = x;
+        int y = 0;
+        int c=0;
+        while (x != 0) {
+            y += x % 10;
+            x /= 10;
+            if(x/10!=0){
+                c=y;
+            }
+            if (x != 0) {
+                y *= 10;
+            }
+            if (y * 100 == y || y > (int) Math.pow(10, 8) || y < (int) Math.pow(-2, 31))
+                System.out.println(0);
+            if(c*10>y && y>(int) Math.pow(10, 6))
+                System.out.println(0+55);
+        }
+        System.out.println(y);
     }
 
 }
