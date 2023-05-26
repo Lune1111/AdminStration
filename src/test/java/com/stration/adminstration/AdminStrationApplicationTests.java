@@ -23,25 +23,26 @@ class AdminStrationApplicationTests {
 
     @Test
     void contextLoads() {
-        int x = 123;
-        int z = x;
-        int y = 0;
-        int c=0;
-        while (x != 0) {
-            y += x % 10;
-            x /= 10;
-            if(x/10!=0){
-                c=y;
-            }
-            if (x != 0) {
-                y *= 10;
-            }
-            if (y * 100 == y || y > (int) Math.pow(10, 8) || y < (int) Math.pow(-2, 31))
-                System.out.println(0);
-            if(c*10>y && y>(int) Math.pow(10, 6))
-                System.out.println(0+55);
-        }
-        System.out.println(y);
+       String[] words={"adc","abc","wzy"};
+       int save=0;
+       for(int i=0;i< words.length;i++){
+           int[][] difference=new int[words.length][words.length];
+           String word=words[i];
+           for(int j=0;j<word.length()-1;j++){
+               char num=word.charAt(j);
+               char num2=word.charAt(j+1);
+               difference[i][j]=num2-num;
+               System.out.println("第"+i+"轮"+"输出的整数为"+difference[i][j]);
+               try{
+                   if((difference[i][j]!=difference[i-1][j]) || difference[i][j]!=save){
+                       System.out.println(word);
+                   }
+               }catch (Exception exception){
+                   save=difference[i][j];
+
+               }
+           }
+       }
     }
 
 }
