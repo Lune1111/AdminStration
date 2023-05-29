@@ -1,6 +1,7 @@
 package com.stration.adminstration.generator.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.stration.adminstration.generator.Result.Result;
 import com.stration.adminstration.generator.pojo.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -15,6 +16,6 @@ import java.util.List;
 public interface UserService extends IService<User> {
 
  List<User> selectPageVo(IPage<User> page, Integer state);
-boolean login(User user);
+String login(User user);
 
 }
