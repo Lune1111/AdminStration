@@ -5,7 +5,9 @@ import com.stration.adminstration.generator.Result.Code;
 import com.stration.adminstration.generator.Result.Result;
 import com.stration.adminstration.generator.pojo.User;
 import com.stration.adminstration.generator.service.UserService;
+import com.stration.adminstration.generator.util.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -24,7 +26,7 @@ public class LoginController {
     @PostMapping
     public Result userLogin(@RequestBody User user) {
         try {
-                return new Result(Code.PostSuccess,userService.login(user));
+            return new Result(Code.PostSuccess,userService.login(user));
 
         } catch (Exception exception) {
             return new Result(Code.PostEro, "登录失败", exception.getMessage());
@@ -34,13 +36,10 @@ public class LoginController {
     @PostMapping("/register")
     public Result registerUser(@RequestBody User headImage){
         try{
-//            List<String> fileList=new ArrayList<>();
-//            Long Id = headImage.getUserId();
-//            fileList.add(headImage.getAvatar());
-//            Map<String,String> map=minioTemplate.uploadBlobTest(fileList,headImage.getUserId(),"avatar");
-//            headImage.setAvatar(map.get("url"));
-//            headImage.setUserId(Id);
-            return new Result(Code.PostSuccess,"注册成功", userService.save(headImage));
+            String jwt =JWTUtils.geneJsonWebToken(headImage);
+            headImage.setPassword(jwt);
+            userService.save(headImage);
+            return new Result(Code.PostSuccess,"注册成功");
         }catch(Exception exception){
             System.out.println(exception.getMessage());
             return new Result(Code.PostEro,"ERO");
