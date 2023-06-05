@@ -6,6 +6,7 @@ import com.stration.adminstration.generator.Result.Result;
 import com.stration.adminstration.generator.pojo.User;
 import com.stration.adminstration.generator.service.UserService;
 import com.stration.adminstration.generator.util.JWTUtils;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,6 @@ public class LoginController {
     public Result userLogin(@RequestBody User user) {
         try {
             return new Result(Code.PostSuccess,userService.login(user));
-
         } catch (Exception exception) {
             return new Result(Code.PostEro, "登录失败", exception.getMessage());
         }
@@ -36,8 +36,9 @@ public class LoginController {
     @PostMapping("/register")
     public Result registerUser(@RequestBody User headImage){
         try{
-            String jwt =JWTUtils.geneJsonWebToken(headImage);
-            headImage.setPassword(jwt);
+            BCryptPasswordEncoder passwordEncoder =new BCryptPasswordEncoder();
+            String encode = passwordEncoder.encode(headImage.getPassword());
+            headImage.setPassword(encode);
             userService.save(headImage);
             return new Result(Code.PostSuccess,"注册成功");
         }catch(Exception exception){

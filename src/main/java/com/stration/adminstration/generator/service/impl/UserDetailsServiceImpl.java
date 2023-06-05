@@ -27,6 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         QueryWrapper queryWrapper =new QueryWrapper();
         queryWrapper.eq("user_name",username);
         User user =mapper.selectOne(queryWrapper);
+        System.out.println(user.getPassword());
         if(user==null){
             return null;
         }
