@@ -7,9 +7,12 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.stration.adminstration.generator.Result.Code;
 import com.stration.adminstration.generator.Result.Result;
+import com.stration.adminstration.generator.pojo.LoginUser;
 import com.stration.adminstration.generator.pojo.User;
 import com.stration.adminstration.generator.service.UserService;
 import com.stration.adminstration.generator.mapper.UserMapper;
+import com.stration.adminstration.generator.util.JWTUtils;
+import com.stration.adminstration.generator.util.RedisUtils;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,6 +32,8 @@ import java.util.Objects;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
     @Autowired
     private AuthenticationManager authentication;
+    @Autowired
+    private RedisUtils redisUtils;
 
     @Override
     public List<User> selectPageVo(IPage<User> page, Integer state) {
@@ -42,6 +47,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (Objects.isNull(authenticate)) {
             return "用户不存在";
         } else {
+            LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
+            JWTUtils.geneJsonWebToken(loginUser);
+            redisUtils.set("login"+user.getUserId(),user.getUserName());
             return "登录成功";
         }
     }

@@ -1,5 +1,6 @@
 package com.stration.adminstration.generator.util;
 
+import com.stration.adminstration.generator.pojo.LoginUser;
 import com.stration.adminstration.generator.pojo.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -30,11 +31,11 @@ public class JWTUtils {
     /**
      * 加密生成jwt令牌
      */
-    public static String geneJsonWebToken(User user){
+    public static String geneJsonWebToken(LoginUser user){
         return Jwts.builder().setSubject(SUBJECT)    //设置住体（颁布者）
-                .claim("user_name",user.getUserName()) //设置荷载
-                .claim("user_id",user.getUserId()) //设置荷载
-                .claim("status",user.getStatus())//设置荷载
+                .claim("user_name",user.getUser()) //设置荷载
+                .claim("user_id",user.getUser().getUserId()) //设置荷载
+                .claim("status",user.getUser().getStatus())//设置荷载
                 .setIssuedAt(new Date())//设置生成时间
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRE))//设置过期时间
                 .signWith(SignatureAlgorithm.HS256,SECRET)//使用HS256算法，加密密钥
